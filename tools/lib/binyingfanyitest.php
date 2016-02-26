@@ -121,9 +121,9 @@ Class HTTPTranslator {
 }
 try {
     //Client ID of the application.
-    $clientID       = "ajiang";
+    $clientID       = "xxxxxxxxx";
     //Client Secret key of the application.
-    $clientSecret = "JRxH3kuxeWmOl7Jyn0BUEhj7tkvXCYNv89JhKZp6X7M=";
+    $clientSecret = "xxxxxxxxx";
     //OAuth Url.
     $authUrl      = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/";
     //Application Scope Url
@@ -186,9 +186,9 @@ try {
 
 
 
-$clientID       = "ajiang";
+$clientID       = "xxxxxxxx";
     //Client Secret key of the application.
-    $clientSecret = "JRxH3kuxeWmOl7Jyn0BUEhj7tkvXCYNv89JhKZp6X7M=";
+    $clientSecret = "xxxxxxxxxxx";
     //OAuth Url.
     $authUrl      = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/";
     //Application Scope Url
