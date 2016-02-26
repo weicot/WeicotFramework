@@ -1,0 +1,67 @@
+<?php
+error_reporting(E_ALL);
+$compatabilityLevel = 717;    // eBay API version
+ 
+$devID = "defbab2c-f208-41dd-98dd-99a6edb39b43";
+$appID = "WEICOTCO-49a1-4016-a872-7d24b0cfa12a";
+$certID = "a370ae45-de75-4548-ad49-85fcacd5531c";
+$serverUrl = "https://api.apacshipping.sandbox.ebay.com.hk/aspapi/v4/ApacShippingService";
+$userToken = "AgAAAA**AQAAAA**aAAAAA**KhdpVg**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AAk4WkCpWHoAmdj6x9nY+seQ**nBoDAA**AAMAAA**8Smo/fxe+RzPIkYNmRNw8EdK7Mr26vaql2o1BSbEkY/NmzNbHv4GXMUC2pSkpPl/D8biLP1mFs6YbKpASMKo3yxRVyyP5gNKy2ETDcqwMSgr5RFcE6sxu7zc88huIEtAJog6IA593NtYhnxr8TVGrqTuAJvN6L2KWT5ncpz5WPdeQPs516olsWVf3iMThr1QpneD8hgRTdH4lIvxF5IG24d3JdGoEWd/ntqyksPxRlzlkw6Hi7EasKXu4gzIvc+sRAIdU8eFvWnhtjwgncgzDez8AI0mDePy+GVGqCaX1G7f51Au3uMKtYxaHy/Oh9JZT5RI07/fmJyFukkFp35hFb3y/UTkT34CFnkRph3BBiq6OzzrkhGCtn6PCtWqW6t1jTgCJWJB9D/MtEGi4prwD9Uqj/T2zQLcxyo7sEIimoW5uI4tGCx8MZrPLg+z9Lh8IOy+CUsqTgPLkXC+c3m5HkvgtAKEZMvEnEBdxFNqZY3/1d+/rkUzYWR/5ihr3+4WFP+u9SpEICO7HDIwqWE7SIfNa+rlruDxJWPi6sE7KlSLEtmd19TdMm2yF3e7UAMbFconQ8A8JNPBeJ1JZgOE4FXyU1hY9iqvO9lUQHQ3ssrC4XZi2nMTXI0N7pQLJKKPcgGkOutNyXmYS5ncoX0egW6lUhv3KbagxI2G5Ik20q5VXwiap7DZWmrSu8T4Lq9TKyXbowF4z4lVcJebJvrVF3NeS12D5Tj4uL4Hwhc+JQ4Fe5icK8GFZALIG3j3txm8";
+ 
+$siteID = 0;
+//要调用的API
+$verb = 'GetTokenStatus';
+  
+$headers = array (
+    'X-EBAY-API-COMPATIBILITY-LEVEL: ' . $compatabilityLevel,
+    'X-EBAY-API-DEV-NAME: ' . $devID,
+    'X-EBAY-API-APP-NAME: ' . $appID,
+    'X-EBAY-API-CERT-NAME: ' . $certID,
+              
+    //the name of the call we are requesting
+    'X-EBAY-API-CALL-NAME: ' . $verb,           
+              
+    //SiteID must also be set in the Request's XML
+    //SiteID = 0  (US) - UK = 3, Canada = 2, Australia = 15, ....
+    //SiteID Indicates the eBay site to associate the call with
+    'X-EBAY-API-SITEID: ' . $siteID,
+);
+  
+//POST的数据，一个XML字符串
+$requestXmlBody = '<?xml version="1.0" encoding="utf-8"?>
+<GetTokenStatusRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+  <RequesterCredentials>
+    <eBayAuthToken>'.$userToken.'</eBayAuthToken>
+  </RequesterCredentials>
+</GetTokenStatusRequest>';
+  
+//使用CURL发送数据        
+//initialise a CURL session
+$connection = curl_init();
+//set the server we are using (could be Sandbox or Production server)
+curl_setopt($connection, CURLOPT_URL, $serverUrl);
+          
+//stop CURL from verifying the peer's certificate
+curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, 0);
+curl_setopt($connection, CURLOPT_SSL_VERIFYHOST, 0);
+          
+//set the headers using the array of headers
+curl_setopt($connection, CURLOPT_HTTPHEADER, $headers);
+          
+//set method as POST
+curl_setopt($connection, CURLOPT_POST, 1);
+          
+//set the XML body of the request
+curl_setopt($connection, CURLOPT_POSTFIELDS, $requestXmlBody);
+          
+//set it to return the transfer as a string from curl_exec
+curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
+          
+//Send the Request
+$response = curl_exec($connection);
+          
+//close the connection
+curl_close($connection);
+  
+header("Content-type: text/xml");
+print_r($response);  

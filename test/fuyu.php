@@ -1,0 +1,11 @@
+<?php 
+$a="aq";
+$p=Null;
+$a='';
+$a='0';
+var_dump($a);
+unset($a);
+//$a="bq";
+var_dump($a==$p);
+var_dump($a);
+?>

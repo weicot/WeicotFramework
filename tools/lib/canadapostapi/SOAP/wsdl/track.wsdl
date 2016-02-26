@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="postoffice" targetNamespace="http://www.canadapost.ca/ws/soap/track" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.canadapost.ca/ws/soap/track" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.canadapost.ca/ws/soap/track">
+
+			<xsd:element name="get-delivery-confirmation-certificate-request">
+				<xsd:complexType>
+					<xsd:all>
+						<xsd:element minOccurs="0" name="locale" type="tns:locale" />
+						<xsd:element name="platform-id" type="tns:PlatformIDType" minOccurs="0" />
+						<xsd:element name="pin" type="tns:pin" />
+					</xsd:all>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="get-delivery-confirmation-certificate-response">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="delivery-confirmation-certificate">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="filename" type="xsd:string" />
+									<xsd:element name="image" type="xsd:string" />
+									<xsd:element name="mime-type" type="xsd:string" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="messages" type="tns:messages" />
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="get-signature-image-request">
+				<xsd:complexType>
+					<xsd:all>
+						<xsd:element minOccurs="0" name="locale" type="tns:locale" />
+						<xsd:element name="platform-id" type="tns:PlatformIDType" minOccurs="0" />
+						<xsd:element name="pin" type="tns:pin" />
+					</xsd:all>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="get-signature-image-response">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="signature-image">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="filename" type="xsd:string" />
+									<xsd:element name="image" type="xsd:string" />
+									<xsd:element name="mime-type" type="xsd:string" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="messages" type="tns:messages" />
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="get-tracking-detail-request">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" name="locale" type="tns:locale" />
+						<xsd:element name="platform-id" type="tns:PlatformIDType" minOccurs="0" />
+						<xsd:choice>
+							<xsd:element name="pin" type="tns:pin" />
+							<xsd:element name="dnc" type="tns:dnc" />
+						</xsd:choice>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="get-tracking-detail-response">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="tracking-detail">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="pin" type="xsd:string" />
+									<xsd:element name="active-exists" type="xsd:string" />
+									<xsd:element name="archive-exists" type="xsd:string" />
+									<xsd:element name="changed-expected-date" type="xsd:string" />
+									<xsd:element name="destination-postal-id" type="xsd:string" />
+									<xsd:element name="expected-delivery-date" type="tns:emptyDate" />
+									<xsd:element name="changed-expected-delivery-reason" type="xsd:string" />
+									<xsd:element name="mailed-by-customer-number" type="xsd:string" />
+									<xsd:element name="mailed-on-behalf-of-customer-number" type="xsd:string" />
+									<xsd:element name="original-pin" type="xsd:string" />
+									<xsd:element name="service-name" type="xsd:string" />
+									<xsd:element name="service-name-2" type="xsd:string" />
+									<xsd:element name="customer-ref-1" type="xsd:string" />
+									<xsd:element name="customer-ref-2" type="xsd:string" />
+									<xsd:element name="return-pin" type="xsd:string" />
+									<xsd:element name="signature-image-exists" type="xsd:string" />
+									<xsd:element name="suppress-signature" type="xsd:string" />
+									<xsd:element name="delivery-options" type="tns:delivery-options" />
+									<xsd:element name="cod-remit-info" type="tns:cod-remit-info" minOccurs="0" />
+									<xsd:element name="significant-events" type="tns:significant-events" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="messages" type="tns:messages" />
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="get-tracking-summary-request">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" name="locale" type="tns:locale" />
+						<xsd:element name="platform-id" type="tns:PlatformIDType" minOccurs="0" />
+						<xsd:choice>
+							<xsd:element name="pin" type="tns:pin" />
+							<xsd:element name="dnc" type="tns:dnc" />
+							<xsd:element name="reference-criteria" type="tns:reference-criteria" />
+						</xsd:choice>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="get-tracking-summary-response">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="tracking-summary">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="pin-summary" type="tns:pin-summary" maxOccurs="100" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>					
+						<xsd:element name="messages" type="tns:messages" />
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:complexType name="delivery-options">
+				<xsd:sequence>
+					<xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="delivery-option" type="xsd:string" />
+								<xsd:element name="delivery-option-description" type="xsd:string" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="significant-events">
+				<xsd:sequence>
+					<xsd:element name="occurrence" minOccurs="0" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:all>
+								<xsd:element name="event-identifier" type="xsd:string" />
+								<xsd:element name="event-date" type="xsd:string" />
+								<xsd:element name="event-time" type="xsd:string" />
+								<xsd:element name="event-time-zone" type="xsd:string" />
+								<xsd:element name="event-description" type="xsd:string" />
+								<xsd:element name="signatory-name" type="xsd:string" />
+								<xsd:element name="event-site" type="xsd:string" />
+								<xsd:element name="event-province" type="xsd:string" />
+								<xsd:element name="event-retail-location-id" type="xsd:string" />
+								<xsd:element name="event-retail-name" type="xsd:string" />
+							</xsd:all>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="cod-remit-info">
+				<xsd:sequence>
+					<xsd:element name="pin" type="xsd:string" />
+					<xsd:element name="type" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+
+			<xsd:complexType name="reference-criteria">
+				<xsd:all>
+					<xsd:element name="customer-number" type="xsd:string" minOccurs="0" />
+					<xsd:element name="reference-number" type="xsd:string" />
+					<xsd:element name="destination-postal-code" type="tns:postal-code" minOccurs="0" />
+					<xsd:element name="mailing-date-from" type="xsd:date" />
+					<xsd:element name="mailing-date-to" type="xsd:date" />
+				</xsd:all>
+			</xsd:complexType>
+
+			<xsd:complexType name="pin-summary">
+				<xsd:all>
+					<xsd:element name="pin" type="xsd:string" />
+					<xsd:element name="origin-postal-id" type="xsd:string" />
+					<xsd:element name="destination-postal-id" type="xsd:string" />
+					<xsd:element name="destination-province" type="xsd:string" />
+					<xsd:element name="service-name" type="xsd:string" />
+					<xsd:element name="mailed-on-date" type="tns:emptyDate" />
+					<xsd:element name="expected-delivery-date" type="tns:emptyDate" />
+					<xsd:element name="actual-delivery-date" type="tns:emptyDate" />
+					<xsd:element name="delivery-option-completed-ind" type="xsd:string" />
+					<xsd:element name="event-date-time" type="xsd:string" />
+					<xsd:element name="event-description" type="xsd:string" />
+					<xsd:element name="attempted-date" type="tns:emptyDate" />
+					<xsd:element name="customer-ref-1" type="xsd:string" />
+					<xsd:element name="customer-ref-2" type="xsd:string" />
+					<xsd:element name="return-pin" type="xsd:string" />
+					<xsd:element name="event-type" type="xsd:string" />
+					<xsd:element name="event-location" type="xsd:string" />
+					<xsd:element name="signatory-name" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+
+			<xsd:simpleType name="pin">
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="[a-zA-Z0-9]{12,13}" />
+					<xsd:pattern value="[a-zA-Z0-9]{16}" />
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:simpleType name="dnc">
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="[0-9]{15}" />
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:simpleType name="postal-code">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="14" />
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:simpleType name="emptyDate">
+				<xsd:union memberTypes="xsd:date">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="" />
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:union>
+			</xsd:simpleType>
+
+			<xsd:complexType name="messages">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" maxOccurs="unbounded" name="message">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="code" type="xsd:string" />
+								<xsd:element name="description" type="xsd:string" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:simpleType name="locale">
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="([eE][nN]|[fF][rR])" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:simpleType name="PlatformIDType">
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="\d{1,10}" />
+				</xsd:restriction>
+			</xsd:simpleType>			
+
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="GetDeliveryConfirmationCertificateRequest">
+		<wsdl:part name="body" element="tns:get-delivery-confirmation-certificate-request"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="GetDeliveryConfirmationCertificateResponse">
+		<wsdl:part name="body" element="tns:get-delivery-confirmation-certificate-response"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="GetSignatureImageRequest">
+		<wsdl:part name="body" element="tns:get-signature-image-request"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="GetSignatureImageResponse">
+		<wsdl:part name="body" element="tns:get-signature-image-response"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="GetTrackingDetailRequest">
+		<wsdl:part name="body" element="tns:get-tracking-detail-request"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="GetTrackingDetailResponse">
+		<wsdl:part name="body" element="tns:get-tracking-detail-response"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="GetTrackingSummaryRequest">
+		<wsdl:part name="body" element="tns:get-tracking-summary-request"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="GetTrackingSummaryResponse">
+		<wsdl:part name="body" element="tns:get-tracking-summary-response"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:portType name="TrackingPortType">
+		<wsdl:operation name="GetDeliveryConfirmationCertificate">
+			<wsdl:input message="tns:GetDeliveryConfirmationCertificateRequest"></wsdl:input>
+			<wsdl:output message="tns:GetDeliveryConfirmationCertificateResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetSignatureImage">
+			<wsdl:input message="tns:GetSignatureImageRequest"></wsdl:input>
+			<wsdl:output message="tns:GetSignatureImageResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetTrackingDetail">
+			<wsdl:input message="tns:GetTrackingDetailRequest"></wsdl:input>
+			<wsdl:output message="tns:GetTrackingDetailResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetTrackingSummary">
+			<wsdl:input message="tns:GetTrackingSummaryRequest"></wsdl:input>
+			<wsdl:output message="tns:GetTrackingSummaryResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="Tracking" type="tns:TrackingPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GetDeliveryConfirmationCertificate">
+			<soap:operation soapAction="http://www.canadapost.ca/ws/soap/track/GetDeliveryConfirmationCertificate" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetSignatureImage">
+			<soap:operation soapAction="http://www.canadapost.ca/ws/soap/track/GetSignatureImage" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetTrackingDetail">
+			<soap:operation soapAction="http://www.canadapost.ca/ws/soap/track/GetTrackingDetail" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetTrackingSummary">
+			<soap:operation soapAction="http://www.canadapost.ca/ws/soap/track/GetTrackingSummary" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="TrackingService">
+		<wsdl:port name="TrackingPort" binding="tns:Tracking">
+			<soap:address location="https://ct.soa-gw.canadapost.ca/vis/soap/track" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

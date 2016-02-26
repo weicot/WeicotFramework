@@ -1,0 +1,2 @@
+<?php
+Weicot::getModel('homepage');
