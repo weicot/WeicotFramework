@@ -186,9 +186,9 @@ try {
 
 
 
-$clientID       = "ajiang";
+$clientID       = "xxxxx";
     //Client Secret key of the application.
-    $clientSecret = "JRxH3kuxeWmOl7Jyn0BUEhj7tkvXCYNv89JhKZp6X7M=";
+    $clientSecret = "xxxxxx";
     //OAuth Url.
     $authUrl      = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/";
     //Application Scope Url
