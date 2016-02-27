@@ -1,18 +1,18 @@
 <?php
 class TrackPost{
 	/*
-	*¿ìµİ²éÑ¯ API
-	*×÷Õß:ajiang-tuzi
-	*±ğÃû:Ğ¡½­
-	*ÈÕÆÚ:2015/12/09
-	*°æ±¾:0.1
+	*å¿«é€’æŸ¥è¯¢ API
+	*ä½œè€…:ajiang-tuzi
+	*åˆ«å:å°æ±Ÿ
+	*æ—¥æœŸ:2015/12/09
+	*ç‰ˆæœ¬:0.1
 	*/
-	public $AppKey1='e594f80a86b245c0a3bcff7988461c7c'; //¿ìµİAPIÓ¦ÓÃKEY 1
-	public $AppKey='afdf315a3c434cb2b622b0780c4e159d'; //¿ìµİAPIÓ¦ÓÃKEY 2
-	public $KeyUrl='http://apis.haoservice.com/lifeservice/exp?com=';//key URL 
+	public $AppKey1='xxxxxxxx'; //å¿«é€’APIåº”ç”¨KEY 1
+	public $AppKey='xxxxxxxxx'; //å¿«é€’APIåº”ç”¨KEY 2
+	public $KeyUrl='xxxxxxxxxxx';//key URL 
 	//public $ID='9242126810';
-	public $typeCom;//ÀàĞÍ
-	public $typeNu;//µ¥ºÅ
+	public $typeCom;//ç±»å‹
+	public $typeNu;//å•å·
 	public function curl($url){
         if (function_exists('curl_init') == 1){
             $curl = curl_init();
@@ -26,7 +26,7 @@ class TrackPost{
 			return $get_content;
 	}
 	}
-	public function xml_to_array( $xml )//xml ×ªÊı×é º¯Êı
+	public function xml_to_array( $xml )//xml è½¬æ•°ç»„ å‡½æ•°
 {
     $reg = "/<(\\w+)[^>]*?>([\\x00-\\xFF]*?)<\\/\\1>/";
     if(preg_match_all($reg, $xml, $matches))
@@ -36,7 +36,7 @@ class TrackPost{
         for($i = 0; $i < $count; $i++)
         {
             $key= $matches[1][$i];
-            $val = $this->xml_to_array( $matches[2][$i] );  // µİ¹é
+            $val = $this->xml_to_array( $matches[2][$i] );  // é€’å½’
             if(array_key_exists($key, $arr))
             {
                 if(is_array($arr[$key]))
@@ -60,11 +60,11 @@ class TrackPost{
 }
 	public function KDAPI($typeCom,$typeNu){
 		header("Content-type:text/html; charset=utf-8");
-		$typeNu=strtolower($typeNu);//×ªĞ¡Ğ´
-		$url=$this->KeyUrl.$typeCom.'&no='.$typeNu.'&key='.$this->AppKey; //¹¹ÔìÇëÇóurl
+		$typeNu=strtolower($typeNu);//è½¬å°å†™
+		$url=$this->KeyUrl.$typeCom.'&no='.$typeNu.'&key='.$this->AppKey; //æ„é€ è¯·æ±‚url
 		$content=$this->curl($url);
 		//Mage::log($content, null, 'kd.log');
-		$content=json_decode($content,true);//Ç¿ÖÆ×°»»Îª×Ö·û´®
+		$content=json_decode($content,true);//å¼ºåˆ¶è£…æ¢ä¸ºå­—ç¬¦ä¸²
 		if(!($content['result']==NULL)){
 		$result=$content['result']['data'];
 		foreach ($result as $value){
@@ -74,16 +74,16 @@ class TrackPost{
 			echo 'Being processed';
 		}
 	}
-	//¹ÙÍøDHL ½Ó¿Ú
+	//å®˜ç½‘DHL æ¥å£
 	public function DHLAPI($ID,$type){ 
 		header("Content-type:text/html; charset=utf-8");
-		$url='http://www.dhl.com/shipmentTracking?AWB='.$ID.'&countryCode=g0&languageCode=en';
+		$url='http://www.dhl.com/shipmentTracking?AWB='.$ID.'&countryCode=g0&languageCode=enxxxxxxxxx';
 		$content=$this->curl($url);
-		$content=json_decode($content,true);//Ç¿ÖÆ×°»»Îª×Ö·û´®
+		$content=json_decode($content,true);//å¼ºåˆ¶è£…æ¢ä¸ºå­—ç¬¦ä¸²
 		$result=$content['results'][0]['checkpoints'];
 		if($type=='json'){
           echo  json_encode($result);
-		  //Êä³öjson Êı¾İ
+		  //è¾“å‡ºjson æ•°æ®
 		}else{
 		foreach ($result as $value){
 			echo $value['description'].'<br />';
@@ -93,11 +93,11 @@ class TrackPost{
 		}
 	}
 	public function USPSAPI($ID,$type){
-    $url = "http://Production.ShippingAPIs.com/ShippingAPI.dll";//API ½Ó¿Ú  
+    $url = "http://Production.ShippingAPIs.com/ShippingAPI.dll";//API æ¥å£  
     $ch = curl_init();  
     // set the target url  
     curl_setopt($ch, CURLOPT_URL, $url);  
-    curl_setopt($ch, CURLOPT_HEADER, 0);  //Í·²¿ĞÅÏ¢
+    curl_setopt($ch, CURLOPT_HEADER, 0);  //å¤´éƒ¨ä¿¡æ¯
     curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);  
     // parameters to post  
     curl_setopt($ch, CURLOPT_POST, 1);  
@@ -105,16 +105,16 @@ class TrackPost{
     // and other attributes but this is a bare minimum request as
     // an example.
     $data='API=TrackV2&XML=
-    <TrackRequest USERID="014WEICO7038">
+    <TrackRequest USERID="xxxxxxxxxxx">
     <TrackID ID="'.$ID.'"></TrackID>
     </TrackRequest>';
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);  
     $resultxml = curl_exec ($ch);
     $content=$this->xml_to_array($resultxml);
 	if($type=='json'){
-		echo json_encode($content);//json ¸ñÊ½
+		echo json_encode($content);//json æ ¼å¼
 	}else if($type=='xml'){
-		echo $resultxml;//xml ¸ñÊ½
+		echo $resultxml;//xml æ ¼å¼
 	}else{
 	//var_dump($content);
 	$result=$content['TrackResponse']['TrackInfo']['TrackDetail'];
@@ -126,11 +126,11 @@ class TrackPost{
 	
 	public function getKdInfo($typeCom,$typeNu,$type){
 		if (strtolower($typeCom)=='dhl'){
-			$this->DHLAPI($typeNu,$type);//DHL ¹Ù·½½Ó¿Ú
+			$this->DHLAPI($typeNu,$type);//DHL å®˜æ–¹æ¥å£
 		}elseif(strtolower($typeCom)=='usps'){
-			$this->USPSAPI($typeNu,$type);//USPS ½Ó¿Ú
+			$this->USPSAPI($typeNu,$type);//USPS æ¥å£
 		}else{
-			$this->KDAPI($typeCom,$typeNu,$type);//µÚÈı·½½Ó¿Ú
+			$this->KDAPI($typeCom,$typeNu,$type);//ç¬¬ä¸‰æ–¹æ¥å£
 		}
 	}
 		
@@ -142,12 +142,12 @@ is_array($in)&&count($in)?$in=true:$in=false;
 return $in;
 }
 
-//empty ¼ì²â±äÁ¿ÊÇ·ñÓĞÉèÖÃ
+//empty æ£€æµ‹å˜é‡æ˜¯å¦æœ‰è®¾ç½®
 public function vp($in){
 	isset($in)&&!empty($in)?$in=true:$in=false;
 	return $in;
 }
-//ÃÜ³×Æ¥Åä
+//å¯†åŒ™åŒ¹é…
 public function KEY($key){
 	echo $key;
 	$mainkey=array(
@@ -163,27 +163,27 @@ public function KEY($key){
 
 
 
-//µØÖ· ¡®http://www.weicot.com/api.php?com='$typeCom.'&no='.$typeNu.'&user='.$user.'&type='.$type; 
+//åœ°å€ â€˜http://www.weicot.com/api.php?com='$typeCom.'&no='.$typeNu.'&user='.$user.'&type='.$type; 
 
-//Ä¿Ç°Ö»Ö§³Ö DHL USPS
+//ç›®å‰åªæ”¯æŒ DHL USPS
 
-//Ö§³Ö¸ñÊ½
+//æ”¯æŒæ ¼å¼
 
 //usps xml json all
    
 //DHL json all
 
-//all ÊÇÒÔ <br /> Îª·Ö¸ô·û
-//com ¿ìµİ¹«Ë¾
-//no ¿ìµİºÅ
-//user Ê¹ÓÃÕËºÅºÅ
-//type ÀàĞÍ
+//all æ˜¯ä»¥ <br /> ä¸ºåˆ†éš”ç¬¦
+//com å¿«é€’å…¬å¸
+//no å¿«é€’å·
+//user ä½¿ç”¨è´¦å·å·
+//type ç±»å‹
 
 
 
 
-echo $typeCom=$_GET['com']; //¿ìµİ¹«Ë¾
-echo $typeNu=$_GET['no']; //¿ìµİºÅ
+echo $typeCom=$_GET['com']; //å¿«é€’å…¬å¸
+echo $typeNu=$_GET['no']; //å¿«é€’å·
 echo $AppKey=$_GET['user'];//key
 echo $type=$_GET['type']; //type
 
@@ -196,17 +196,17 @@ if (Censor::KEY($AppKey)){
 	$TrackInfo=$TrackPost->getKdInfo($typeCom,$typeNu,$type);
 	//var_dump($TrackInfo);
 }else{
-	echo 'MSG:false/Î´ÖªµÄÊä³öÀàĞÍ';
+	echo 'MSG:false/æœªçŸ¥çš„è¾“å‡ºç±»å‹';
 	exit;
 }
 }
 else{
-	echo 'MSG:false/ÓÃ»§²»´æÔÚ';
+	echo 'MSG:false/ç”¨æˆ·ä¸å­˜åœ¨';
 	exit ;
 }
 
 }else{
-	echo 'MSG:false/²ÎÊı´íÎó';
+	echo 'MSG:false/å‚æ•°é”™è¯¯';
 	exit;
 	
 }
