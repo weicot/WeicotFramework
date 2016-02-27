@@ -1,7 +1,7 @@
 <?php
 class Aps_Weicot_Model_GetTime{
-	public $AppKey1='e594f80a86b245c0a3bcff7988461c7c'; //快递API应用KEY 1
-	public $AppKey='afdf315a3c434cb2b622b0780c4e159d'; //快递API应用KEY 2
+	public $AppKey1='xxxxxx'; //快递API应用KEY 1
+	public $AppKey='xxxxxxxxxxxxxxxxx'; //快递API应用KEY 2
 	public $KeyUrl='http://apis.haoservice.com/lifeservice/exp?com=';//key URL 
 	//public $ID='9242126810';
 	public $typeCom;//类型
@@ -112,7 +112,7 @@ class Aps_Weicot_Model_GetTime{
     // and other attributes but this is a bare minimum request as
     // an example.
     $data='API=TrackV2&XML=
-    <TrackRequest USERID="014WEICO7038">
+    <TrackRequest USERID="xxxxxxx">
     <TrackID ID="'.$ID.'"></TrackID>
     </TrackRequest>';
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);  
