@@ -3,7 +3,7 @@
 //$VAR='/trackings/china-ems/LX918539197CN';
 $VAR='/trackings/realtime';
 $APIURL='http://api.trackingmore.com/v2'.$VAR;
-$APIKEY='150bfd8e-0504-42a2-ad51-ce8f075741f1';
+$APIKEY='xxxxxxxxxxxxxxxxxxx';
 header("Content-type:text/html; charset=utf-8");
 
 class Trackingmore_Detrack_Helper_Data 
