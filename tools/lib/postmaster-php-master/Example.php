@@ -1,7 +1,7 @@
 <?php
 /* at startup set API key */
 require_once('./lib/Postmaster.php');
-Postmaster::setApiKey("pp_MTk1OTEwMDE6OG5FM3owV1pkcUI0QTUxME9OMG5WanhESHVB");
+Postmaster::setApiKey("xxxxxxxxxxxx");
 
 /* at first validate recipient address */
 $result = Postmaster_AddressValidation::validate(array(
