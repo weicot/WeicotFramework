@@ -1,7 +1,7 @@
 <?php
-//神一样的方法
+//绁炰竴鏍风殑鏂规硶
 define ('DS',DIRECTORY_SEPARATOR);
-define('ROOT',dirname(dirname(__FILE__));
+define('ROOT',dirname(dirname(__FILE__)));
 class Weicot{
     public function  getBlock($Name){
         require_once (ROOT.DS.'app'.DS.'code'.DS.'block'.DS.strtolower($Name).'.php');
@@ -25,12 +25,12 @@ class Weicot{
         require_once (ROOT.DS.'skin'.DS.'js'.DS.$Name);
     }
     public function getLib($Name){
-        require_once (ROOT.DS.'lib'.DS.strtolower($className).'.php');
+        require_once (ROOT.DS.'lib'.DS.strtolower($Name).'.php');
     }
 	public function  getCore($Name){
         require_once (ROOT.DS.'lib'.DS.'Core'.DS.strtolower($Name).'.php');
     } 
     public function getFile($Name){
-        require_once (ROOT_PATH.'Media'.$in);
+        require_once (ROOT_PATH.'Media'.$Name);
     }
 }
