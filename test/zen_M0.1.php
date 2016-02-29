@@ -2,7 +2,7 @@
 define("DB_DATABASE","m1");
 define("SNAME","127.0.0.1");
 define("UNAME","root");
-define("PWORD","1.24mll");
+define("PWORD","xxxxx");
 class dbs{
 	public $con;
 	public static $sname=SNAME;
